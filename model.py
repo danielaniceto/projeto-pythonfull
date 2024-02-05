@@ -9,7 +9,7 @@ class Produtos:
         self.produto = produto
         self.nome = nome
         self.preco = preco
-        self.categoria= categoria
+        self.categoria = categoria
 
 class Estoque:
     def __init__(self, produto: Produtos, qtd_produto, id):
@@ -18,13 +18,12 @@ class Estoque:
          self.peso = id
 
 class Venda:
-    def __init__(self, itens_vendidos: Produtos, qtd_vendida, vendedor, comprador,  id: Estoque, data = datetime.now()):
+    def __init__(self, itens_vendidos: Produtos, qtd_vendida, vendedor, comprador, data = datetime.now().strftime("%d/%m/%Y")):
         self.itens_vendidos = itens_vendidos
         self.qtd_vendida = qtd_vendida
         self.vendedor = vendedor
         self.comprador = comprador
         self.data = data
-        self.id = id
 
 class Fornecedor:
     def __init__(self, nome_empresa, cnpj_empresa, telefone_contato, categoria):
