@@ -53,7 +53,7 @@ class VendasDao:
             return "O arquivo de vendas não existe!!!"
 
 x = VendasDao.ler_vendas()
-print(x[0].qtd_vendida)
+print(x[0].comprador)
 
 
 
