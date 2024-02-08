@@ -64,8 +64,8 @@ class EstoqueDao:
     @classmethod
     def salvar_estoque(cls, estoques: Estoque):
         with open("Estoque.txt", "a") as arqestoque:
-            arqestoque.writelines (     estoques.produto.nome +
-                                   "|"+ estoques.produto.preco +
+            arqestoque.writelines (      estoques.produto.nome +
+                                   "|"+  estoques.produto.preco +
                                    "|" + estoques.produto.categoria + 
                                    "|" + estoques.qtd_produto)
             
@@ -90,7 +90,8 @@ class EstoqueDao:
 
         except FileExistsError:
             return "O arquivo de estoque não existe!!!!"
-        
+
+class FornecedoresDao:
     @classmethod
     def salvar_fornecedor(cls, fornecedores: Fornecedor):
         with open("Fornecedores.txt", "a") as arqfornecedor:
@@ -121,6 +122,36 @@ class EstoqueDao:
         except FileExistsError:
             return "O arquivo de fornecedores não existe!!!!"
 
+class PessoaDao:
+    @classmethod
+    def salvar_pessoa(cls, pessoas: Pessoa):
+        with open("Pessoas.txt", "a") as arqpessoa:
+            arqpessoa.writelines (       pessoas.nome +
+                                   "|" + pessoas.endereco +
+                                   "|" + pessoas.cpf + 
+                                   "|" + pessoas.email +
+                                   "|" + pessoas.telefone)
+            
+            arqpessoa.writelines("\n")
+
+    def ler_pessoa(cls):
+        try:
+            with open("Fornecedores.txt", "r") as arqfornecedor:
+                cls.fornecedores = arqfornecedor.readlines()
+
+            cls.fornecedores = list(map(lambda x: x.replace("\n", ""), cls.fornecedores))
+            cls.fornecedores = list(map(lambda x: x.split("|"), cls.fornecedores))
+            #print(cls.fornecedores)
+
+            list_fornecedor = []
+
+            for i in cls.fornecedores:
+                    list_fornecedor.append(Fornecedor(i[0], i[1], i[2]), i[3])
+
+            return list_fornecedor
+
+        except FileExistsError:
+            return "O arquivo de fornecedores não existe!!!!"
 
 
 
