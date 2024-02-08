@@ -2,7 +2,7 @@ from model import *
 
 class CategoriaDao:
     @classmethod
-    def salvar_categoria(cls, categorias: Categoria):
+    def salvar_categoria(cls, categorias):
         with open("Categorias.txt", "a") as arqcategorias:
             arqcategorias.writelines(categorias)
             arqcategorias.writelines("\n")
