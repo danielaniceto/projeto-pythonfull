@@ -47,7 +47,7 @@ class VendasDao:
 
             cls.vendas = list(map(lambda x: x.replace("\n", ""), cls.vendas))
             cls.vendas = list(map(lambda x: x.split("|"), cls.vendas))
-            print(cls.vendas)
+            #print(cls.vendas)
 
             list_venda = []
 
@@ -79,7 +79,7 @@ class EstoqueDao:
 
             cls.estoques = list(map(lambda x: x.replace("\n", ""), cls.estoques))
             cls.estoquess = list(map(lambda x: x.split("|"), cls.estoques))
-            print(cls.estoques)
+            #print(cls.estoques)
 
             list_estoque = []
             if len(cls.estoques) > 0:
@@ -89,7 +89,40 @@ class EstoqueDao:
             return list_estoque
 
         except FileExistsError:
-            return "O arquivo de estoque não existe!!!"
+            return "O arquivo de estoque não existe!!!!"
+        
+    @classmethod
+    def salvar_fornecedor(cls, fornecedores: Fornecedor):
+        with open("Fornecedores.txt", "a") as arqfornecedor:
+            arqfornecedor.writelines (   fornecedores.nome_empresa +
+                                   "|" + fornecedores.cnpj_empresa +
+                                   "|" + fornecedores.telefone_contato + 
+                                   "|" + fornecedores.categoria)
+            
+            arqfornecedor.writelines("\n")
+
+    @classmethod
+    def ler_fornecedor(cls):
+        try:
+            with open("Fornecedores.txt", "r") as arqfornecedor:
+                cls.fornecedores = arqfornecedor.readlines()
+
+            cls.fornecedores = list(map(lambda x: x.replace("\n", ""), cls.fornecedores))
+            cls.fornecedores = list(map(lambda x: x.split("|"), cls.fornecedores))
+            #print(cls.fornecedores)
+
+            list_fornecedor = []
+
+            for i in cls.fornecedores:
+                    list_fornecedor.append(Fornecedor(i[0], i[1], i[2]), i[3])
+
+            return list_fornecedor
+
+        except FileExistsError:
+            return "O arquivo de fornecedores não existe!!!!"
+
+
+
 
     
     
