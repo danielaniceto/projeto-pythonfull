@@ -12,10 +12,10 @@ class Produtos:
         self.categoria = categoria
 
 class Estoque:
-    def __init__(self, produto: Produtos, qtd_produto, id):
+    def __init__(self, produto: Produtos, qtd_produto, peso):
          self.produto = produto
          self.qtd_produto = qtd_produto
-         self.peso = id
+         self.peso = peso
 
 class Venda:
     def __init__(self, itens_vendidos: Produtos, qtd_vendida, vendedor, comprador, data = datetime.now().strftime("%d/%m/%Y")):

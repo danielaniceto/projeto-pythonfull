@@ -29,30 +29,31 @@ class VendasDao:
     @classmethod
     def salvar_vendas(cls, vendas: Venda):
         with open("Vendas.txt", "a") as arqvendas:
-            arqvendas.writelines(vendas.itens_vendidos.nome + "|" + vendas.itens_vendidos.preco + "|"
-                                 + vendas.itens_vendidos.categoria + "|" + str(vendas.qtd_vendida) + "|"
-                                 + vendas.vendedor + "|" + vendas.comprador + "|" + vendas.data + "|")
+            arqvendas.writelines(str(vendas.itens_vendidos.nome + "|" + vendas.itens_vendidos.preco + "|"
+                                 + vendas.itens_vendidos.categoria + "|" + (vendas.qtd_vendida) + "|"
+                                 + vendas.vendedor + "|" + vendas.comprador + "|" + vendas.data + "|"))
             arqvendas.writelines("\n")
     @classmethod
     def ler_vendas(cls):
         try:
             with open("Vendas.txt", "r") as arqvendas:
                 cls.vendas = arqvendas.readlines()
+
             cls.vendas = list(map(lambda x: x.replace("\n", ""), cls.vendas))
+            cls.vendas = list(map(lambda x: x.split("|"), cls.vendas))
             
-            vend = []
+            venda = []
 
             for i in cls.vendas:
-                vend.append(Categoria(i))
+                venda.append(Venda(Produtos(i[0], i[1], i[2], i[3]), i[4], i[5], i[6]))
 
-            return vend
+            return venda
 
         except FileExistsError:
             return "O arquivo de vendas não existe!!!"
 
-x = Produtos ("Banana", "Banana da Terra", "5", "frutas")
-y = Venda(x, "3", "sara", "daniel")
-VendasDao.ler_vendas()
+x = VendasDao.ler_vendas()
+print(x[0].comprador)
 
 
 
