@@ -15,12 +15,12 @@ class CategoriaDao:
             
             cls.categorias = list(map(lambda x: x.replace("\n", ""), cls.categorias))
             
-            categori = []
+            list_categoria = []
 
             for i in cls.categorias:
-                categori.append(Categoria(i))
+                list_categoria.append(Categoria(i))
 
-            return categori
+            return list_categoria
 
         except FileExistsError:
             return "O arquivo de categorias não existe!!!"
@@ -29,10 +29,16 @@ class VendasDao:
     @classmethod
     def salvar_vendas(cls, vendas: Venda):
         with open("Vendas.txt", "a") as arqvendas:
-            arqvendas.writelines(str(vendas.itens_vendidos.nome + "|" + vendas.itens_vendidos.preco + "|"
-                                 + vendas.itens_vendidos.categoria + "|" + (vendas.qtd_vendida) + "|"
-                                 + vendas.vendedor + "|" + vendas.comprador + "|" + vendas.data + "|"))
+            arqvendas.writelines(vendas.iten_vendidos.nome +
+                                     "|" + vendas.iten_vendidos.preco +
+                                     "|" + vendas.iten_vendidos.categoria +
+                                     "|" + vendas.vendedor + 
+                                     "|" + vendas.comprador +
+                                     "|" + str(vendas.qtd_vendida) +
+                                     "|" + vendas.data)
+            
             arqvendas.writelines("\n")
+
     @classmethod
     def ler_vendas(cls):
         try:
@@ -41,31 +47,70 @@ class VendasDao:
 
             cls.vendas = list(map(lambda x: x.replace("\n", ""), cls.vendas))
             cls.vendas = list(map(lambda x: x.split("|"), cls.vendas))
-            
-            venda = []
+            print(cls.vendas)
+
+            list_venda = []
 
             for i in cls.vendas:
-                venda.append(Venda(Produtos(i[0], i[1], i[2], i[3]), i[4], i[5], i[6]))
+                list_venda.append(Venda(Produtos(i[0], i[1], i[2]), i[3], i[4], i[5], i[6]))
 
-            return venda
+
+            return list_venda
 
         except FileExistsError:
             return "O arquivo de vendas não existe!!!"
 
-x = VendasDao.ler_vendas()
-print(x[0].comprador)
+class EstoqueDao:
+    @classmethod
+    def salvar_estoque(cls, estoques: Estoque):
+        with open("Estoque.txt", "a") as arqestoque:
+            arqestoque.writelines (     estoques.produto.nome +
+                                   "|"+ estoques.produto.preco +
+                                   "|" + estoques.produto.categoria + 
+                                   "|" + estoques.qtd_produto)
+            
+            arqestoque.writelines("\n")
 
+    @classmethod
+    def ler_estoque(cls):
+        try:
+            with open("Estoque.txt", "r") as arqestoques:
+                cls.estoques = arqestoques.readlines()
 
+            cls.estoques = list(map(lambda x: x.replace("\n", ""), cls.estoques))
+            cls.estoquess = list(map(lambda x: x.split("|"), cls.estoques))
+            print(cls.estoques)
 
+            list_estoque = []
+            if len(cls.estoques) > 0:
+                for i in cls.estoques:
+                    list_estoque.append(Estoque(Produtos(i[0], i[1], i[2]), i[3]))
 
+            return list_estoque
 
+        except FileExistsError:
+            return "O arquivo de estoque não existe!!!!"
 
-
-
-
-
-
-"""class ProdutosDao:
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    """class ProdutosDao:
     @classmethod
     def salvar_produtos(cls, produtos: Produtos):
         with open("Produtos.txt", "a") as arqprodutos:
