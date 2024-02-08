@@ -124,82 +124,31 @@ class FornecedoresDao:
 
 class PessoaDao:
     @classmethod
-    def salvar_pessoa(cls, pessoas: Pessoa):
-        with open("Pessoas.txt", "a") as arqpessoa:
-            arqpessoa.writelines (       pessoas.nome +
-                                   "|" + pessoas.endereco +
-                                   "|" + pessoas.cpf + 
-                                   "|" + pessoas.email +
-                                   "|" + pessoas.telefone)
+    def salvar_pessoa(cls, clientes: Pessoa):
+        with open("Clientes.txt", "a") as arqpessoa:
+            arqpessoa.writelines (       clientes.nome +
+                                   "|" + clientes.endereco +
+                                   "|" + clientes.cpf + 
+                                   "|" + clientes.email +
+                                   "|" + clientes.telefone)
             
             arqpessoa.writelines("\n")
 
     def ler_pessoa(cls):
         try:
-            with open("Fornecedores.txt", "r") as arqfornecedor:
-                cls.fornecedores = arqfornecedor.readlines()
+            with open("Clientes.txt", "r") as arqcliente:
+                cls.clientes = arqcliente.readlines()
 
-            cls.fornecedores = list(map(lambda x: x.replace("\n", ""), cls.fornecedores))
-            cls.fornecedores = list(map(lambda x: x.split("|"), cls.fornecedores))
-            #print(cls.fornecedores)
+            cls.clientes = list(map(lambda x: x.replace("\n", ""), cls.clientes))
+            cls.clientes = list(map(lambda x: x.split("|"), cls.clientes))
+            #print(cls.clientes)
 
-            list_fornecedor = []
+            list_cliente = []
 
-            for i in cls.fornecedores:
-                    list_fornecedor.append(Fornecedor(i[0], i[1], i[2]), i[3])
+            for i in cls.clientes:
+                    list_cliente.append(Pessoa(i[0], i[1], i[2]), i[3], i[4])
 
-            return list_fornecedor
-
-        except FileExistsError:
-            return "O arquivo de fornecedores não existe!!!!"
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    """class ProdutosDao:
-    @classmethod
-    def salvar_produtos(cls, produtos: Produtos):
-        with open("Produtos.txt", "a") as arqprodutos:
-            arqprodutos.writelines(produtos.produto + "|" + produtos.nome + "|"
-                                 + str(produtos.preco) + "|" + produtos.categoria + "|")
-            arqprodutos.writelines("\n")
-
-    @classmethod
-    def ler_produtos(cls):
-        try:
-            with open("Produtos.txt", "r") as arqprodutos:
-                cls.produtos = arqprodutos.readlines()
-            cls.produtos = list(map(lambda x: x.replace("\n", ""), cls.produtos))
-            
-            produt = []
-
-            for i in cls.produtos:
-                produt.append(Produtos(i))
-
-            return produt
+            return list_cliente
 
         except FileExistsError:
-            return "O arquivo de produtos não existe!!!"
-
-ProdutosDao.salvar_produtos("Agua", "Agua sem gas", "0.99", "bebidas")
-ProdutosDao.salvar_produtos("Coca Cola", "Coca Cola sem açucar", "8.99", "Bebidas")
-ProdutosDao.salvar_produtos("Vinho", "Vinho tinto", "21.99", "Bebidas")
-ProdutosDao.ler_produtos()"""
+            return "O arquivo de clientes não existe!!!!"
