@@ -33,7 +33,7 @@ class Fornecedor:
 class Pessoa:
     def __init__(self, nome, endereco, cpf, email, telefone):
         self.nome = nome
-        self.idade = endereco
+        self.endereco = endereco
         self.cpf = cpf
         self.email = email
         self.telefone = telefone

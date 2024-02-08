@@ -134,6 +134,7 @@ class PessoaDao:
             
             arqpessoa.writelines("\n")
 
+    @classmethod
     def ler_pessoa(cls):
         try:
             with open("Clientes.txt", "r") as arqcliente:
@@ -149,6 +150,39 @@ class PessoaDao:
                     list_cliente.append(Pessoa(i[0], i[1], i[2]), i[3], i[4])
 
             return list_cliente
+
+        except FileExistsError:
+            return "O arquivo de clientes não existe!!!!"
+
+class FunicionarioDao:
+    @classmethod
+    def salvar_funcionario(cls, funcionarios: Funcionario):
+        with open("Funcionarios.txt", "a") as arqfuncionario:
+            arqfuncionario.writelines (  funcionarios.nome +
+                                   "|" + funcionarios.endereco +
+                                   "|" + funcionarios.cpf + 
+                                   "|" + funcionarios.email +
+                                   "|" + funcionarios.telefone + 
+                                   "|" + funcionarios.clt)
+            
+            arqfuncionario.writelines("\n")
+    
+    @classmethod
+    def ler_funcionario(cls):
+        try:
+            with open("Funcionarios.txt", "r") as arqfuncionario:
+                cls.funcionarios = arqfuncionario.readlines()
+
+            cls.funcionarios = list(map(lambda x: x.replace("\n", ""), cls.funcionarios))
+            cls.funcionarios = list(map(lambda x: x.split("|"), cls.funcionarios))
+            #print(cls.clientes)
+
+            list_funcionario = []
+
+            for i in cls.clientes:
+                    list_funcionario.append(Pessoa(i[0], i[1], i[2]), i[3], i[4], i[5])
+
+            return list_funcionario
 
         except FileExistsError:
             return "O arquivo de clientes não existe!!!!"
