@@ -1,0 +1,2 @@
+Banana|5|Frutas|Daniel|Sara|1|08/02/2024
+Banana|5|Frutas|Daniel|Sara|1|08/02/2024
