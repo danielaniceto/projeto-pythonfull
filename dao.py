@@ -15,12 +15,12 @@ class CategoriaDao:
             
             cls.categorias = list(map(lambda x: x.replace("\n", ""), cls.categorias))
             
-            list_categoria = []
+            list_categorias = []
 
             for i in cls.categorias:
-                list_categoria.append(Categoria(i))
+                list_categorias.append(Categoria(i))
 
-            return list_categoria
+            return list_categorias
 
         except FileExistsError:
             return "O arquivo de categorias não existe!!!"

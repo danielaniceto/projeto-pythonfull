@@ -61,3 +61,17 @@ class CategoriaController:
 
 #a = CategoriaController()
 #a.alterarCategoria("Frios", "Frios")
+
+    def mostrarCategorias(self):
+
+        categorias = CategoriaDao.ler_categoria()
+
+        if len(categorias) == 0:
+            print("Não ha categorias para mostrar!!!")
+        
+        else:
+            for i in categorias:
+                print(f"Categorias: {i.categorias}")
+
+a = CategoriaController()
+a.mostrarCategorias()
