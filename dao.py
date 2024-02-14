@@ -65,7 +65,7 @@ class EstoqueDao:
     def salvar_estoque(cls, estoques: Estoque):
         with open("Estoque.txt", "a") as arqestoque:
             arqestoque.writelines (      estoques.produto.nome +
-                                   "|"+  estoques.produto.preco +
+                                   "|" +  estoques.produto.preco +
                                    "|" + estoques.produto.categoria + 
                                    "|" + estoques.qtd_produto)
             
