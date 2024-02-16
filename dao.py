@@ -62,12 +62,12 @@ class VendasDao:
 
 class EstoqueDao:
     @classmethod
-    def salvar_estoque(cls, estoques: Estoque):
+    def salvar_estoque(self, cls, estoques: Estoque):
         with open("Estoque.txt", "a") as arqestoque:
-            arqestoque.writelines (      estoques.produto.nome +
+            arqestoque.writelines(       estoques.produto.nome +
                                    "|" + estoques.produto.preco +
                                    "|" + estoques.produto.categoria + 
-                                   "|" + str(estoques.qtd_produto))
+                                   "|" + estoques.qtd_produto)
             
             arqestoque.writelines("\n")
 
@@ -78,7 +78,7 @@ class EstoqueDao:
                 cls.estoques = arqestoques.readlines()
 
             cls.estoques = list(map(lambda x: x.replace("\n", ""), cls.estoques))
-            cls.estoquess = list(map(lambda x: x.split("|"), cls.estoques))
+            cls.estoques = list(map(lambda x: x.split("|"), cls.estoques))
             #print(cls.estoques)
 
             list_estoque = []
